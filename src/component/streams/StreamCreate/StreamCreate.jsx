@@ -22,16 +22,27 @@ class StreamCreate extends Component {
                     {...formsProps.input}
 
                 />
+                <div>{formsProps.meta.error}</div>
 
             </div>
         )
     }
 
 
+
+    //on passe la methpde en argument a handelSubmit de redux-form
+    
+    onSubmit = (valueForm) =>{
+    console.log(valueForm)
+    
+
+    }
+
+
     render() {
         return (
-
-            <form>
+            //this.props.handleSubmit methode de redux-form 
+            <form className='ui form' onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field name="title"
                     component={this.renderInput}
                     label='Enter title'
@@ -45,13 +56,31 @@ class StreamCreate extends Component {
 
                 />
 
+                <button className='ui button primary'>Submit</button>
+
             </form>
         );
     }
 }
 
 
+const validate = (formValue)=>{
+
+    const errors ={}
+    if(!formValue.title){
+        errors.title = 'you must enter a title'
+    }
+    if(!formValue.description){
+        errors.description = 'you must enter a description'
+    }
+
+    return errors
+
+}
+
+
 
 export default reduxForm({
-    form: 'streamCreate'
+    form: 'streamCreate',
+    validate:validate
 })(StreamCreate);
