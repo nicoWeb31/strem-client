@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { createStream } from '../../../action/action'
+
 
 
 class StreamCreate extends Component {
@@ -51,7 +54,9 @@ class StreamCreate extends Component {
     //on passe la methpde en argument a handelSubmit de redux-form
     
     onSubmit = (valueForm) =>{
-    console.log(valueForm)
+    
+    //call action
+    this.props.createStream(valueForm)
     
 
     }
@@ -98,7 +103,9 @@ const validate = (formValue)=>{
 
 
 
-export default reduxForm({
+const formWrapped = reduxForm({
     form: 'streamCreate',
     validate:validate
 })(StreamCreate);
+
+export default connect(null,{createStream})(formWrapped);

@@ -1,0 +1,12 @@
+//get all stream
+GET http://localhost:3001/streams
+
+###
+
+POST http://localhost:3001/streams
+
+
+{
+    "title": "toto",
+    "description": "slkdfjsldkfjsldkfjslkdfjlskdfj"
+}
