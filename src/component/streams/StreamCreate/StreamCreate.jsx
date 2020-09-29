@@ -8,13 +8,29 @@ class StreamCreate extends Component {
         this.state = {};
     }
 
-
+    // meta pour voir quand l'utilisateur rentre dans le form, pour declancher le rendu des errors
+    renderErrors = ({error, touched}) =>{
+        if(touched && error) {
+            return (
+                <div className="ui error message">
+                    <div className="header">
+                        {error}
+                    </div>
+                </div>
+            )
+        }
+    }
+    
     renderInput = (formsProps) => {
+
+
+        const className = `field ${formsProps.meta.error && formsProps.meta.touched ? "error" : "" }`
+
         return (
 
-            <div className="field">
+            <div className={className}>
                 <label>{formsProps.label}</label>
-                <input
+                <input autoComplete="off"
 
                     // onChange={formsProps.input.onChange}
                     // value={formsProps.input.value}
@@ -22,11 +38,13 @@ class StreamCreate extends Component {
                     {...formsProps.input}
 
                 />
-                <div>{formsProps.meta.error}</div>
+                <div>{this.renderErrors(formsProps.meta)}</div>
 
             </div>
         )
     }
+
+
 
 
 
@@ -42,7 +60,7 @@ class StreamCreate extends Component {
     render() {
         return (
             //this.props.handleSubmit methode de redux-form 
-            <form className='ui form' onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <form className='ui form error' onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field name="title"
                     component={this.renderInput}
                     label='Enter title'
