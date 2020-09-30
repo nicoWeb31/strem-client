@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {
     CREATE_STREAM,
     DELETE_STREAM,
@@ -27,7 +29,7 @@ export default (state= {}, action) =>{
             }
 
         case DELETE_STREAM : 
-            return
+            return _.omit(state, action.payload)
 
         default:
             return state;
