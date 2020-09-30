@@ -13,12 +13,28 @@ class StreamList extends Component {
         this.props.getAllStream()
     }
 
+    renderAdmin = (idStream) => {
+
+        if (this.props.authId === idStream) {
+            return (
+                <div className="right floated content">
+
+                    <button className='ui button primary'> Edit</button>
+                    <button className='ui button negative'> Delete</button>
+
+                    
+                </div>
+            )
+        }
+    }
+
 
     renderList = () => {
 
         return this.props.streams.map(stream => {
             return (
                 <div className='item' key={stream.id}>
+                {this.renderAdmin(stream.usedId)}
                     <i className='large middle aligned icon camera' />
                     <div className="content">
                         {stream.title}
@@ -33,7 +49,7 @@ class StreamList extends Component {
 
     render() {
 
-        console.log(this.props.streams)
+        console.log(this.props.authId)
 
         return (
             <div>
@@ -51,7 +67,10 @@ class StreamList extends Component {
 
 const mapStateToProps = state => {
     //object.values renvoie un tableau d'un objet 
-    return { streams: Object.values(state.streams) }
+    return {
+        streams: Object.values(state.streams),
+        authId: state.auth.usedId
+    }
 }
 export default connect(mapStateToProps, { getAllStream })(StreamList);
 

@@ -26,8 +26,13 @@ export const singnOut = () => {
 }
 
 
-export const createStream = formValue => async dispatch => {
-    const response = await apiStream.createStream(formValue);
+
+//argument dispatch et getState
+export const createStream = formValue => async (dispatch,getState) => {
+
+    //on recupere usersId ans le store via getState() sur state auth
+    const {usedId} = getState().auth;
+    const response = await apiStream.createStream({...formValue, usedId});
 
     dispatch({ type: CREATE_STREAM, payload: response.data })
 
