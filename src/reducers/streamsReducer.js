@@ -13,6 +13,12 @@ import {
 export default (state= {}, action) =>{
     switch(action.type){
 
+        case GET_LIST_STREAM:
+            //recuper le tableau et le transform en objet
+            return {...state, ..._.mapKeys(action.payload, 'id')}
+                
+            
+
         case GET_ONE_STREAM : 
             return {
                 ...state, [action.payload.id]: action.payload
