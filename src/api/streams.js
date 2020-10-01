@@ -19,7 +19,8 @@ const getOneStream =(id)=>{
 }
 
 const upDateStream = (id,formValue) =>{
-    return axiosInstance.put(`/streams/${id}`,formValue)
+    //patch met a jour juste les nouvelle infos, put remplace
+    return axiosInstance.patch(`/streams/${id}`,formValue)
 }
 
 const deleteStream = (id)=>{

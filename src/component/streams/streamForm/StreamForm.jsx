@@ -60,6 +60,7 @@ class StreamForm extends Component {
                 <Field name="title"
                     component={this.renderInput}
                     label='Enter title'
+                    
 
                 />
 
