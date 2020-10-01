@@ -14,16 +14,15 @@ class StreamList extends Component {
         this.props.getAllStream()
     }
 
-    renderAdmin = (idStream) => {
+    renderAdmin = (idStreamer, idStream) => {
 
-        if (this.props.authId === idStream) {
+        if (this.props.authId === idStreamer) {
             return (
                 <div className="right floated content">
 
-                    <button className='ui button primary'> Edit</button>
-                    <button className='ui button negative'> Delete</button>
+                    <Link to={`/sreams/edit/${idStream}`} className='ui button primary'>Edit</Link>
+                    <Link to={`/sreams/delete/${idStream}`} className='ui button negative' >Delete</Link>
 
-                    
                 </div>
             )
         }
@@ -31,9 +30,9 @@ class StreamList extends Component {
 
 
     renderCreate = () => {
-        if(this.props.isSignedIn){
+        if (this.props.isSignedIn) {
             return (
-                <div style={{textAlign : 'right'}}>
+                <div style={{ textAlign: 'right' }}>
                     <Link to='/stream/new' className='ui button primary'>
                         Create Stream
                     </Link>
@@ -49,7 +48,7 @@ class StreamList extends Component {
         return this.props.streams.map(stream => {
             return (
                 <div className='item' key={stream.id}>
-                {this.renderAdmin(stream.usedId)}
+                    {this.renderAdmin(stream.usedId, stream.id)}
                     <i className='large middle aligned icon camera' />
                     <div className="content">
                         {stream.title}
@@ -85,7 +84,7 @@ const mapStateToProps = state => {
     return {
         streams: Object.values(state.streams),
         authId: state.auth.usedId,
-        isSignedIn : state.auth.isSignedIn
+        isSignedIn: state.auth.isSignedIn
     }
 }
 export default connect(mapStateToProps, { getAllStream })(StreamList);
