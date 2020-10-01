@@ -8,7 +8,8 @@ import {
     EDIT_STREAM
 } from './types';
 
-import apiStream from '../api/streams'
+import apiStream from '../api/streams';
+import history from '../history'
 
 
 export const signIn = (userId) => {
@@ -35,6 +36,9 @@ export const createStream = formValue => async (dispatch,getState) => {
     const response = await apiStream.createStream({...formValue, usedId});
 
     dispatch({ type: CREATE_STREAM, payload: response.data })
+
+    //custom history
+    history.push('/')
 
 }
 

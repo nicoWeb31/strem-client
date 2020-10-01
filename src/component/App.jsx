@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import history from '../history'
 import Header from './header/Header';
 import StreamCreate from './streams/StreamCreate/StreamCreate';
 import StreamDelete from './streams/StreamDelete/StreamDelete';
@@ -9,7 +10,9 @@ import StreamShow from './streams/StreamShow/StreamShow';
 
 const App = () => {
     return (
-        <BrowserRouter>
+
+        //for custom history use router no browserouter
+        <Router history={history}>
             <div className='ui container'>
 
                 <Header />
@@ -24,7 +27,7 @@ const App = () => {
             </div>
 
 
-        </BrowserRouter>
+        </Router>
     );
 }
 
