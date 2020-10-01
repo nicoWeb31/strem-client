@@ -3,6 +3,11 @@ GET http://localhost:3001/streams
 
 ###
 
+//get all stream
+GET http://localhost:3001/streams/edit/14
+
+###
+
 POST http://localhost:3001/streams
 
 

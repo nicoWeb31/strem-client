@@ -1,19 +1,19 @@
+
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { createStream } from '../../../action/action'
 
 
 
-class StreamCreate extends Component {
+
+class StreamForm extends Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
 
     // meta pour voir quand l'utilisateur rentre dans le form, pour declancher le rendu des errors
-    renderErrors = ({ error, touched }) => {
-        if (touched && error) {
+    renderErrors = ({error, touched}) =>{
+        if(touched && error) {
             return (
                 <div className="ui error message">
                     <div className="header">
@@ -23,23 +23,20 @@ class StreamCreate extends Component {
             )
         }
     }
-
+    
     renderInput = (formsProps) => {
 
 
-        const className = `field ${formsProps.meta.error && formsProps.meta.touched ? "error" : ""}`
+        const className = `field ${formsProps.meta.error && formsProps.meta.touched ? "error" : "" }`
 
         return (
 
             <div className={className}>
                 <label>{formsProps.label}</label>
                 <input autoComplete="off"
-
                     // onChange={formsProps.input.onChange}
                     // value={formsProps.input.value}
-
                     {...formsProps.input}
-
                 />
                 <div>{this.renderErrors(formsProps.meta)}</div>
 
@@ -49,14 +46,10 @@ class StreamCreate extends Component {
 
 
 
-    //on passe la methpde en argument a handelSubmit de redux-form
-
-    onSubmit = (valueForm) => {
-
-        //call action
-        this.props.createStream(valueForm)
-
-
+    //on passe la methpde en argument a handelSubmit de redux-form !!!!!
+    
+    onSubmit = (valueForm) =>{
+    this.props.onFormSubmit(valueForm)
     }
 
 
@@ -84,14 +77,14 @@ class StreamCreate extends Component {
     }
 }
 
+//validation formumaire
+const validate = (formValue)=>{
 
-const validate = (formValue) => {
-
-    const errors = {}
-    if (!formValue.title) {
+    const errors ={}
+    if(!formValue.title){
         errors.title = 'you must enter a title'
     }
-    if (!formValue.description) {
+    if(!formValue.description){
         errors.description = 'you must enter a description'
     }
 
@@ -101,9 +94,8 @@ const validate = (formValue) => {
 
 
 
-const formWrapped = reduxForm({
-    form: 'streamCreate',
-    validate: validate
-})(StreamCreate);
+export default reduxForm({
+    form: 'streamForm',
+    validate:validate
+})(StreamForm);
 
-export default connect(null, { createStream })(formWrapped);
