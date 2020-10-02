@@ -46,6 +46,9 @@ export const deleteStream = id => async dispatch => {
     await apiStream.deleteStream(id);
 
     dispatch({ type: DELETE_STREAM, payload : id})
+
+     //custom history
+    history.push('/')
 }
 
 
