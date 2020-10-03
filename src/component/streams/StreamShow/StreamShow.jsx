@@ -11,7 +11,7 @@ class StreamShow extends Component{
     constructor(props) {
         super(props);
 
-        this.videoRef= 
+        this.videoRef = React.createRef();
     }
     // useEffect(()=>{
     //     const getData = function(id){
@@ -23,7 +23,7 @@ class StreamShow extends Component{
 
 
     componentDidMount(){
-        this.props.getStream(this.rops.match.params.id)
+        this.props.getStream(this.props.match.params.id)
     }
 
     render(){
@@ -32,7 +32,11 @@ class StreamShow extends Component{
                 
                 <div>
         
-                    <video></video>
+                    <video ref={this.videoRef} 
+
+                        style={{width:'100%'}}
+                        controls
+                    />
         
                     <h1>Show</h1>
                     <h3>{this.props.stream && this.props.stream.title}</h3>
