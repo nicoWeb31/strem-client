@@ -1,26 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react'
+
 import { connect } from 'react-redux'
-import { getStream } from '../../../action/action'
+import { getStream } from '../../../action/action';
+import flv from 'flv.js'
 
 
 
-const StreamShow = (props) => {
+class StreamShow extends Component{
 
-    useEffect(()=>{
-        const getData = function(id){
-            props.getStream(id)
+    constructor(props) {
+        super(props);
+
+        this.videoRef= 
+    }
+    // useEffect(()=>{
+    //     const getData = function(id){
+    //         props.getStream(id)
+    //     }
+
+    //     getData(props.match.params.id)
+    // },[])// eslint-disable-line react-hooks/exhaustive-deps
+
+
+    componentDidMount(){
+        this.props.getStream(this.rops.match.params.id)
+    }
+
+    render(){
+        
+        return (
+                
+                <div>
+        
+                    <video></video>
+        
+                    <h1>Show</h1>
+                    <h3>{this.props.stream && this.props.stream.title}</h3>
+                    <p>{this.props.stream && this.props.stream.description}</p>
+        
+        
+                </div>
+            );
         }
 
-        getData(props.match.params.id)
-    },[])// eslint-disable-line react-hooks/exhaustive-deps
 
-    return (
 
-        <div>
-            <h1>Show</h1>
-            <h3>{props.stream && props.stream.title}</h3>
-        </div>
-    );
+
 }
 
 
