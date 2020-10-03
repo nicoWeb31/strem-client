@@ -36,6 +36,14 @@ class StreamShow extends Component{
         this.player.load();
     }
 
+    componentDidUpdate(){
+        this.player.destroy()
+    }
+
+    componentWillMount(){
+        this.player.destroy()
+    }
+
     render(){
         
         return (
